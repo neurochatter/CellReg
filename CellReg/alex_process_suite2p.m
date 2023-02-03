@@ -30,10 +30,10 @@
 %% Setting paths for the cell registration procedure:
 
 % Defining the data directory:
-data_path='D:\Documents\GitHub\CellReg';
+data_path='F:\round_3\cellreg_results\test_old_data';
 
 % Defining the results_directory and creating the figures_directory:
-results_directory=fullfile(data_path,'SampleData','Results') ;
+results_directory=fullfile(data_path,'Results') ;
 
 figures_directory=fullfile(results_directory,'Figures');
 if exist(figures_directory,'dir')~=7
@@ -43,10 +43,10 @@ end
 figures_visibility='on'; % either 'on' or 'off' (in any case figures are saved)
 
 % define file names of sample data:
-number_of_sessions=5;
+number_of_sessions=8;
 file_names=cell(1,number_of_sessions);
 for file_index=1:number_of_sessions
-    file_names{file_index}=fullfile(data_path,'SampleData',sprintf('spatial_footprints_0%1i.mat',file_index));
+    file_names{file_index}=fullfile(data_path,sprintf('session_%1i.mat',file_index));
 end
         
 %% Stage 1 - Loading the spatial footprints of cellular activity:
@@ -54,7 +54,7 @@ end
 % identified spatial footprints.
 
 % Defining the parameters:
-microns_per_pixel=2.35;
+microns_per_pixel=1;
 
 % Loading the data:
 disp('Stage 1 - Loading sessions')
@@ -71,11 +71,11 @@ disp('Done')
 % 3. Evaluating how suitable the data is for longitudinal analysis
 
 % Defining the parameters for image alignment:
-alignment_type='Translations and Rotations'; % either 'Translations', 'Translations and Rotations' or 'Non-rigid'
+alignment_type='Non-rigid'; % either 'Translations', 'Translations and Rotations' or 'Non-rigid'
 use_parallel_processing=true; % either true or false
 maximal_rotation=30; % in degrees - only relevant if 'Translations and Rotations' is used
 transformation_smoothness=2; % levels of non-rigid FOV transformation smoothness (range 0.5-3)
-reference_session_index=1; 
+reference_session_index=4; 
 
 % Preparing the data for alignment:
 disp('Stage 2 - Aligning sessions')
@@ -124,7 +124,7 @@ disp('Done')
 % correlations from the data.
 
 % Defining the parameters for the probabilstic modeling:
-maximal_distance=14; % cell-pairs that are more than 12 micrometers apart are assumed to be different cells
+maximal_distance=12; % cell-pairs that are more than 12 micrometers apart are assumed to be different cells
 normalized_maximal_distance=maximal_distance/microns_per_pixel;
 p_same_certainty_threshold=0.95; % certain cells are those with p_same>threshld or <1-threshold
 

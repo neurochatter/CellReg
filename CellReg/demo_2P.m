@@ -40,9 +40,10 @@ memory_efficient_run = 1;
 % we need to find the path up-two levels
 [fileroot,~,~] = fileparts(mfilename('fullpath'));
 [fileroot,~,~] = fileparts(fileroot);
+fileroot = 'F:\round_3\cellreg_results\684172\ms3'
 
 % Defining the results_directory and creating the figures_directory:
-results_directory= fullfile(fileroot,'SampleData', 'Results') ;
+results_directory= fullfile(fileroot,'Results') ;
 
 figures_directory=fullfile(results_directory,'Figures');
 if exist(figures_directory,'dir')~=7
@@ -52,10 +53,10 @@ end
 figures_visibility='on'; % either 'on' or 'off' (in any case figures are saved)
 
 % define path of sample data
-number_of_sessions=5;
+number_of_sessions=8;
 file_names=cell(1,number_of_sessions);
 for it = 1:number_of_sessions
-    file_names{it} = fullfile(fileroot, 'SampleData',sprintf('spatial_footprints_0%1i.mat',it));
+    file_names{it} = fullfile(fileroot, sprintf('session_%1i.mat',it));
 end
 
 if memory_efficient_run
